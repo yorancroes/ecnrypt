@@ -13,7 +13,7 @@ services:
       - "5433:5432"
 
   web_encrypt:
-    build: ./flask
+    build: ./app
     restart: always
     environment:
       # Construct DATABASE_URL using the environment variables and correct hostname
@@ -23,8 +23,8 @@ services:
     depends_on:
       - db_encrypt
     volumes:
-      # Use a bind mount so that your local ./flask folder is used inside the container
-      - ./flask:/app
+      # Use a bind mount so that your local ./app folder is used inside the container
+      - ./app:/app
 
 volumes:
   postgres_data:

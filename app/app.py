@@ -1,6 +1,11 @@
 from flask import Flask
+from app.database.init_db import init_db
 
 app = Flask(__name__)
+
+@app.before_first_request
+def initialize():
+    init_db()
 
 @app.route("/")
 def hello():

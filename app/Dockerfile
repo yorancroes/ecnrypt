@@ -1,7 +1,7 @@
-# ./flask/Dockerfile
+# ./app/Dockerfile
 FROM python:3.9-slim
 
-WORKDIR /flask
+WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt requirements.txt
