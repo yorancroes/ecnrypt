@@ -14,6 +14,7 @@ def init_db():
                         date_created TIMESTAMP default CURRENT_TIMESTAMP
                     );
                 """)
+                #Todo: add tables
                 connection.commit()
             print("Database initialized successfully.")
         except Exception as e:
