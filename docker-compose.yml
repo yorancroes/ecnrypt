@@ -22,9 +22,7 @@ services:
       - "5000:5000"
     depends_on:
       - db_encrypt
-    volumes:
-      # Use a bind mount so that your local ./app folder is used inside the container
-      - ./app:/app
+
 
 volumes:
   postgres_data:
