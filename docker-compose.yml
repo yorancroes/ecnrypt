@@ -7,7 +7,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -17,12 +16,15 @@ services:
     build: ./flask
     restart: always
     environment:
-      # Updated DATABASE_URL to match the db service credentials and databas
-      DATABASE_URL: postgres://dummy:123@db:5432/encryptdb
+      # Construct DATABASE_URL using the environment variables and correct hostname
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db_encrypt:5432/${POSTGRES_DB}
     ports:
       - "5000:5000"
     depends_on:
       - db_encrypt
+    volumes:
+      # Use a bind mount so that your local ./flask folder is used inside the container
+      - ./flask:/app
 
 volumes:
   postgres_data:
