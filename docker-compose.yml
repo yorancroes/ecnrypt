@@ -1,0 +1,27 @@
+services:
+
+  db_encrypt:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: dummy
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: encryptdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  web_encrypt:
+    build: ./flask
+    restart: always
+    environment:
+      # Updated DATABASE_URL to match the db service credentials and database
+      DATABASE_URL: postgres://dummy:123@db:5432/encryptdb
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db_encrypt
+
+volumes:
+  postgres_data:
